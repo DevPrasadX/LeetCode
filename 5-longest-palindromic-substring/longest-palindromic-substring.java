@@ -7,7 +7,6 @@ class Solution {
         int maxLength = 0;
         String longest = "";
 
-        // Try every possible substring
         for (int i = 0; i < s.length(); i++) {
             for (int j = i; j < s.length(); j++) {
                 String sub = s.substring(i, j + 1);
