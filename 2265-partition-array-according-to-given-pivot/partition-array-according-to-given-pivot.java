@@ -3,7 +3,6 @@ class Solution {
         int[] less = new int[num.length];
         int[] more =  new int[num.length];
         int[] pivotele =  new int[num.length];
-        int[] finalarray = new int[num.length];
         // [less][pivot][more] print the array in this way
         int p=0; int l=0;int m=0;
 
