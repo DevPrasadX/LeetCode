@@ -7,7 +7,7 @@ class Solution(object):
         total_count = Counter(nums)
         dominant = max(total_count, key=lambda x: total_count[x])
     
-        # Step 2: Check for valid split
+    
         left_count, right_count = 0, total_count[dominant]
         n = len(nums)
     
