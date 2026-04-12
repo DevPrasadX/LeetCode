@@ -1,46 +1,32 @@
-/*
-// Definition for a Node.
-class Node {
-    public int val;
-    public List<Node> neighbors;
-    public Node() {
-        val = 0;
-        neighbors = new ArrayList<Node>();
-    }
-    public Node(int _val) {
-        val = _val;
-        neighbors = new ArrayList<Node>();
-    }
-    public Node(int _val, ArrayList<Node> _neighbors) {
-        val = _val;
-        neighbors = _neighbors;
-    }
-}
-*/
+import java.util.*;
 
 class Solution {
-    public HashMap<Node,Node> map = new HashMap<>();
-     public Node dfs(Node node)
-
-        {
-            if(node ==null)
-            {
-                return node;
-            }
-            if (map.containsKey(node))
-            {
-                return map.get(node);
-            }
-            Node copy = new Node(node.val , new ArrayList());
-            map.put(node,copy);
-            
-            for (Node neighbor : node.neighbors) {
-            copy.neighbors.add(dfs(neighbor));
-        }
-            return copy;
-        }
     public Node cloneGraph(Node node) {
-       
-        return dfs(node);
+        if (node == null) return null;
+
+        HashMap<Node, Node> map = new HashMap<>();
+        Queue<Node> queue = new LinkedList<>();
+
+        // Initialize
+        queue.add(node);
+        map.put(node, new Node(node.val, new ArrayList<>()));
+
+        while (!queue.isEmpty()) {
+            Node current = queue.poll();
+
+            for (Node neighbor : current.neighbors) {
+
+                // If neighbor not cloned
+                if (!map.containsKey(neighbor)) {
+                    map.put(neighbor, new Node(neighbor.val, new ArrayList<>()));
+                    queue.add(neighbor);
+                }
+
+                // Connect current clone to neighbor clone
+                map.get(current).neighbors.add(map.get(neighbor));
+            }
+        }
+
+        return map.get(node);
     }
 }
