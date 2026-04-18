@@ -12,7 +12,7 @@ class Solution {
 
     }
     public int mirrorDistance(int n) {
-        int reversed = reverse(n);
-        return Math.abs(n - reversed);
+ 
+        return Math.abs(n - reverse(n));
     }
 }
