@@ -5,7 +5,7 @@ class Solution {
         int hayStackLength = haystack.length();
         int needleLength = needle.length();
         int diff = hayStackLength - needleLength;
-        // if(needleLength > hayStackLength) return -1;
+        if(needleLength > hayStackLength) return -1;
 
         for( int start=0;start<=diff;start++)
         {
