@@ -13,6 +13,10 @@ class Solution {
             while(left<right)
             {
                 int sum = nums[i]+nums[left]+nums[right];
+                if(sum==target)
+                {
+                    return sum;
+                }
                 if(Math.abs(sum-target)<Math.abs(closestSum-target))
                 {
                     closestSum = sum;
