@@ -1,29 +1,32 @@
-import java.util.*;
-
 class Solution {
-    public static List<Integer> convertGridToList(int[][] grid) {
-        List<Integer> list = new ArrayList<>();
-        for (int[] row : grid) {
-            for (int num : row) {
-                list.add(num);
-            }
-        }
-        return list;
-    }
 
     public int minOperations(int[][] grid, int x) {
-        List<Integer> list = convertGridToList(grid);
-        Collections.sort(list);
-        
-        int median = list.get(list.size() / 2);
-        int operations = 0;
 
-        for (int num : list) {
-            int diff = Math.abs(num - median);
-            if (diff % x != 0) return -1; 
-            operations += diff / x;
+        ArrayList<Integer> numsArray = new ArrayList<>();
+        int result = 0;
+
+
+        for (int row = 0; row < grid.length; row++) {
+            for (int col = 0; col < grid[0].length; col++) {
+                numsArray.add(grid[row][col]);
+            }
         }
 
-        return operations;
+        Collections.sort(numsArray);
+
+        int length = numsArray.size();
+
+        int finalCommonNumber = numsArray.get(length / 2);
+
+        for (int number : numsArray) {
+      
+            if (number % x != finalCommonNumber % x) {
+                return -1;
+            }
+ 
+            result += Math.abs(finalCommonNumber - number) / x;
+        }
+
+        return result;
     }
 }
