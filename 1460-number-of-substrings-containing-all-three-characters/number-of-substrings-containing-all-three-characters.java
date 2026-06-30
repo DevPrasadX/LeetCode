@@ -1,29 +1,37 @@
 class Solution {
+
     public int numberOfSubstrings(String s) {
-//    BELOW APPROACH EXCEEDED TIME LIMIT SO TRIED WITH SLIDING WINDOW ALGORITHM
-    //     List<String> substrings = new ArrayList<>();
-    // int count=0;
-    //     for (int i = 0; i < str.length(); i++) {
-    //         for (int j = i + 1; j <= str.length(); j++) {
-    //             String sub = str.substring(i, j);
-    //             if (sub.contains("a") && sub.contains("b") && sub.contains("c")) {
-    //                 count++;
-    //             }
-    //         }
-    //     }
+        int len = s.length();
+        int left = 0, right = 0;
+        // Track frequency of a, b, c
+        int[] freq = new int[3];
+        int total = 0;
 
-    //     return count;
+        while (right < len) {
+            // Add character at right pointer to frequency array
+            char curr = s.charAt(right);
+            freq[curr - 'a']++;
 
-        int[] lastSeen = {-1, -1, -1}; 
-        int count = 0;
+            // While we have all required characters
+            while (hasAllChars(freq)) {
+                // All substrings from current window to end are valid
+                // Add count of these substrings to result
+                total += len - right;
 
-        for (int right = 0; right < s.length(); right++) {
-            lastSeen[s.charAt(right) - 'a'] = right; 
-            if (lastSeen[0] != -1 && lastSeen[1] != -1 && lastSeen[2] != -1) {
-                count += 1 + Math.min(lastSeen[0], Math.min(lastSeen[1], lastSeen[2]));
+                // Remove leftmost character and move left pointer
+                char leftChar = s.charAt(left);
+                freq[leftChar - 'a']--;
+                left++;
             }
+
+            right++;
         }
-        return count;
+
+        return total;
+    }
+
+    private boolean hasAllChars(int[] freq) {
+        // Check if we have at least one of each character
+        return freq[0] > 0 && freq[1] > 0 && freq[2] > 0;
     }
 }
-
