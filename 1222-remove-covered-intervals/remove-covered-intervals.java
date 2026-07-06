@@ -11,7 +11,7 @@ int prevEnd = 0;
 
 for(int[] in : intervals) {
     if(in[1] <= prevEnd) {
-        count++; // covered
+        count++;
     } else {
         prevEnd = in[1];
     }
